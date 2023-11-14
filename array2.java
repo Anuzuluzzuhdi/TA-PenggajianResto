@@ -1,13 +1,15 @@
 import java.util.Scanner;
-public class Tugas_Akhir {
+public class array2 {
 public static void main(String[] args) {
     Scanner input = new Scanner(System.in);
     
-    
+    int currentIndex = 0;
+    int maxEmployees = 15;
+    String[][] employeeInfo = new String[maxEmployees][3]; // {nama, jabatan, masaKerja}
         
-    String[][] user = {
-        {"manager1", "password1"},
-        {"manager2", "password2"}
+    String[][] credentials = {
+        {"admin1", "password1"},
+        {"admin2", "password2"}
     };
     
     boolean isLoggedIn = false;
@@ -20,7 +22,7 @@ public static void main(String[] args) {
         System.out.print("Password: ");
         String inputPassword = input.nextLine();
 
-        if ((inputUsername.equals(user[0][0]) || inputUsername.equals(user[1][0])) && (inputPassword.equals(user[0][1]) || inputPassword.equals(user[1][1]))) {
+        if ((inputUsername.equals(credentials[0][0]) || inputUsername.equals(credentials[1][0])) && (inputPassword.equals(credentials[0][1]) || inputPassword.equals(credentials[1][1]))) {
             System.out.println("Login berhasil!");
             isLoggedIn = true;
         } else {
@@ -51,15 +53,8 @@ public static void main(String[] args) {
 
     if (inputSistem.equalsIgnoreCase(sistem[0])) {
         
-        int maxSlipGaji = 100;  // Misalnya, maksimal 100 slip gaji
-        String[] laporanSlipGaji = new String[maxSlipGaji];
-        int currentIndex = 0;
-        
-        boolean sistemPeng = true;
-
-    while (sistemPeng) {
         //String[] divisi = {"Backoffice", "Operasional"};
-        String divisi, jabatan, senior, jawaban;
+        String divisi, jabatan, senior;
         int gajipokok;
         double pajak, tunjangan, nextgaji;
 
@@ -111,14 +106,12 @@ public static void main(String[] args) {
                     if (jamLembur>0){
                      gajiLembur = jamLembur * bonus;
                     totalGaji = nextgaji + gajiLembur;
-
-                    System.out.println("===SLIP GAJI===");
                     System.out.println("Gaji Lembur Anda =" +gajiLembur);
                     System.out.println("Total Gaji Anda =" +totalGaji);
                     } else {
                     System.out.println("Total Gaji Anda = " +nextgaji);
                     }
-            
+
 
             }
             else if (jabatan.equalsIgnoreCase("staff"))
@@ -265,64 +258,56 @@ public static void main(String[] args) {
                     }
                 }                 
             }
-
         }
         else 
         {
             System.out.println("Kategori yang anda masukan salah!");
         }
 
-        System.out.print("Ingin menghitung gaji dengan jabatan lainnya? (ya/tidak): ");
-        jawaban = input.nextLine();
-        if (jawaban.equalsIgnoreCase("ya")) {
-            continue;
-        } else {
-            sistemPeng = false;
-        }
-
-    
-    }
-    } else if (inputSistem.equalsIgnoreCase(sistem[1])) {
         
-        int currentIndex = 0;
-        int maxEmployees = 15;
-        String[][] employeeInfo = new String[maxEmployees][3]; // {nama, jabatan, masaKerja}
+
+    } else if (inputSistem.equalsIgnoreCase(sistem[1])) {
         
         boolean tambahData = true;
 
         while (tambahData && currentIndex < maxEmployees) {
-            for (int i = 0; i < 3; i++) {
-                String dataLabel = i == 0 ? "Nama" : (i == 1 ? "Jabatan" : "Masa Kerja (dalam tahun)");
-                System.out.print("Masukkan " + dataLabel + " Karyawan: ");
-                String inputData = input.nextLine();
-                employeeInfo[currentIndex][i] = inputData;
-            }
+            System.out.println("Masukkan Nama Karyawan: ");
+            String nama = input.nextLine();
+            System.out.println("Masukkan Jabatan Karyawan: ");
+            String jabatan = input.nextLine();
+            System.out.println("Masukkan Masa Kerja (dalam tahun): ");
+            String masaKerja = input.nextLine(); //iki lho kudu nggawe iki, lek ga error 
+            
+            employeeInfo[currentIndex][0] = nama;
+            employeeInfo[currentIndex][1] = jabatan;
+            employeeInfo[currentIndex][2] = String.valueOf(masaKerja);
             currentIndex++;
             
             System.out.println("Data Karyawan yang Telah Ditambahkan:");
-            System.out.println("Nama: " + employeeInfo[currentIndex - 1][0]);
-            System.out.println("Jabatan: " + employeeInfo[currentIndex - 1][1]);
-            System.out.println("Masa Kerja: " + employeeInfo[currentIndex - 1][2] + " tahun");
-
-            System.out.println("Tambah data karyawan lainnya? (ya/tidak/cek): ");
+            System.out.println("Nama: " + nama);
+            System.out.println("Jabatan: " + jabatan);
+            System.out.println("Masa Kerja: " + masaKerja + " tahun");
+            
+            
+            System.out.println("Tambah data karyawan lainnya? (ya/tidak): ");
             String jawaban = input.nextLine();
 
             if (jawaban.equalsIgnoreCase("ya")) {
                 System.out.println("Silakan masukkan data karyawan berikutnya");
             } else if (jawaban.equalsIgnoreCase("cek")) {
-                for (int i = 0; i < currentIndex; i++) {
+                for(int i = 0; i < currentIndex; i++)
+                {
                     System.out.println("Index: " + i);
                     System.out.println("Nama: " + employeeInfo[i][0]);
                     System.out.println("Jabatan: " + employeeInfo[i][1]);
                     System.out.println("Masa Kerja: " + employeeInfo[i][2]);
+                    tambahData = false;
                 }
-                tambahData = false;
             } else {
                 System.out.println("Tidak ada data yang dimasukkan lagi. Terimakasih");
                 tambahData = false;
             }
             }
-
     } else {
         System.out.println("Sistem tidak valid");
     }
