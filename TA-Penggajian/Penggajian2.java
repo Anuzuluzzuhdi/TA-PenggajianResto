@@ -1,8 +1,6 @@
 import java.util.Scanner;
-public class Tugas_Jobshet3 {
+public class Penggajian2 {
     public static void main(String[] args) {
-
         
     }
-    
 }
