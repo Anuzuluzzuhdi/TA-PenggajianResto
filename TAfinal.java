@@ -60,14 +60,14 @@ public class TAfinal {
                         String[] divisi = {"Backoffice", "Operasional"};
                         double[][] gajiArray = {
                             // Divisi: Backoffice
-                            {8000000, 0.05, 0.05},  // Manager
-                            {3000000, 0.04, 0.04},  // Staff Senior
-                            {2000000, 0.03, 0.03},  // Staff Junior
+                            {8000000, 0.05, 0.06},  // Manager
+                            {3000000, 0.04, 0.05},  // Staff Senior
+                            {2000000, 0.03, 0.04},  // Staff Junior
 
                             // Divisi: Operasional
-                            {3500000, 0.05, 0.05},  // Head Kitchen
-                            {2500000, 0.04, 0.04},  // Crew Senior
-                            {1500000, 0.03, 0.03}   // Crew Junior
+                            {3500000, 0.05, 0.06},  // Head Kitchen
+                            {2500000, 0.04, 0.05},  // Crew Senior
+                            {1500000, 0.03, 0.04}   // Crew Junior
                         };
                         int inputDivisi;
                         System.out.println("|-------------------------------|");
@@ -80,7 +80,7 @@ public class TAfinal {
                         inputDivisi = input.nextInt();
                         input.nextLine();
 
-                        int divisiIndex = -1;
+                        int divisiIndex = 0;
 
                         if (inputDivisi == 1) {
                             String[] jabatanBackoffice = {"Manager", "Staff Senior", "Staff Junior"};
