@@ -51,9 +51,10 @@ public class revisiPenggajian {
         int maxPercobaanLogin = 3;
 
         do {
-            System.out.print("Username: ");
+            System.out.println("\n===================================");
+            System.out.print("Masukkan Username: ");
             String inputUsername = scsistem.nextLine();
-            System.out.print("Password: ");
+            System.out.print("Masukkan Password: ");
             String inputPassword = scsistem.nextLine();
 
             if ((inputUsername.equals(user[0][0]) || inputUsername.equals(user[1][0])) &&
@@ -72,17 +73,18 @@ public class revisiPenggajian {
 
     static void menuUtama() {
         while (true) {
-            System.out.println("Selamat datang di Aplikasi Penggajian.");
+            System.out.println("===================================");
+            System.out.println("\nSelamat datang di Aplikasi Penggajian.");
             String[] sistem = {"Penggajian", "Data karyawan", "Laporan Bulanan"};
             int inputSistem;
 
-            System.out.println("|-----------------------------------|");
+            System.out.println("\n|===================================|");
             System.out.println("|      Ingin masuk ke sistem apa?   |");
-            System.out.println("|-----------------------------------|");
+            System.out.println("|===================================|");
             System.out.println("|          1. Data karyawan         |");
             System.out.println("|          2. Penggajian            |");
-            System.out.println("|-----------------------------------|");
-            System.out.print("Masukkan sistem yang ingin anda masuki: ");
+            System.out.println("|===================================|");
+            System.out.print("\nMasukkan sistem yang ingin anda masuki: ");
             inputSistem = scsistem.nextInt();
 
             switch (inputSistem) {
@@ -96,7 +98,7 @@ public class revisiPenggajian {
                     // Tambahkan logika untuk menu laporan bulanan di sini
                     break;
                 default:
-                    System.out.println("Input tidak valid. Silakan masukkan 1, 2, atau 3.");
+                    System.out.println("Inputan tidak valid. Silakan ");
                     break;
             }
         }
@@ -106,14 +108,14 @@ public class revisiPenggajian {
         do {
             int inputmenudata;
             String[] menudata = {"Data", "Tambah Data"};
-            System.out.println("|-----------------------------------|");
+            System.out.println("\n|===================================|");
             System.out.println("|        Sistem Data Karyawan       |");
-            System.out.println("|-----------------------------------|");
+            System.out.println("|===================================|");
             System.out.println("|       1. Data karyawan            |");
             System.out.println("|       2. Tambah Data karyawan     |");
             System.out.println("|       3. Kembali                  |");
-            System.out.println("|-----------------------------------|");
-            System.out.print("  Pilih menu yang ingin anda masuki:   ");
+            System.out.println("|===================================|");
+            System.out.print("  \nPilih menu yang ingin anda masuki:   ");
             inputmenudata = scmenudata.nextInt();
 
             if (inputmenudata == 1) {
@@ -127,15 +129,15 @@ public class revisiPenggajian {
     }
 
     static void tampilkanDataKaryawan() {
-        System.out.println("|============Data Karyawan===========|");
+        System.out.println("\n|============Data Karyawan===========|");
         System.out.println("| ID  |      Jabatan      |   Nama   |");
-        System.out.println("|------------------------------------|");
+        System.out.println("|====================================|");
 
         for (int i = 0; i < currentIndex; i++) {
             System.out.printf("| %-4s| %-18s| %-9s|%n", dataKaryawan1[i][0], dataKaryawan1[i][1], dataKaryawan1[i][2]);
         }
 
-        System.out.println("|------------------------------------|");
+        System.out.println("|===================================|");
     }
 
     static void tambahDataKaryawan() {
@@ -177,13 +179,13 @@ public class revisiPenggajian {
         do {
             int inputmenugaji;
             String[] menugaji = {"Penggajian", "Kembali"};
-            System.out.println("|-----------------------------------|");
+            System.out.println("\n|===================================|");
             System.out.println("|     Sistem Penggajian Karyawan    |");
-            System.out.println("|-----------------------------------|");
+            System.out.println("|===================================|");
             System.out.println("|       1. Penggajian               |");
             System.out.println("|       2. Kembali                  |");
-            System.out.println("|-----------------------------------|");
-            System.out.print("  Pilih menu yang ingin anda masuki:   ");
+            System.out.println("|===================================|");
+            System.out.print("  \nPilih menu yang ingin anda masuki:   ");
             inputmenugaji = scmenugaji.nextInt();
 
             if (inputmenugaji == 1) {
@@ -195,8 +197,8 @@ public class revisiPenggajian {
     }
 
     static void prosesPenggajian() {
-        System.out.println("===========Penggajian Karyawan==========");
-        System.out.println("Masukkan id karyawan yang ingin digaji: ");
+        System.out.println("\n===========Penggajian Karyawan==========");
+        System.out.print("Masukkan id karyawan yang ingin digaji: ");
         String idkaryawan = scidbuatgaji.nextLine();
 
         boolean found = false;
@@ -204,13 +206,14 @@ public class revisiPenggajian {
             String[] karyawan = dataKaryawan1[i];
             if (karyawan[0].equals(idkaryawan)) {
                 // Menampilkan informasi jika ID ditemukan
-                System.out.println("| ID  |      Jabatan      |   Nama   |");
-                System.out.println("|------------------------------------|");
-                System.out.printf("| %-4s| %-18s| %-9s|%n", karyawan[0], karyawan[1], karyawan[2]);
-                System.out.println("|------------------------------------|");
+                System.out.println("\n===================================");
+                System.out.println("| ID  |      Jabatan      |   Nama  |");
+                System.out.println("|===================================|");
+                System.out.printf("| %-4s| %-18s| %-8s|%n", karyawan[0], karyawan[1], karyawan[2]);
+                System.out.println("|===================================|");
                 found = true;
 
-                System.out.println("Proses penggajian dilakukan di sini.");
+                System.out.println("\nProses penggajian dilakukan di sini.");
 
                 // Hitung gaji sesuai jabatan
                 double gajiDasar = gajiArray[i][0];
@@ -226,26 +229,28 @@ public class revisiPenggajian {
                 laporanGaji[i][6] = String.valueOf(gajiBersih);
 
                 // Tampilkan informasi gaji
-                System.out.println("|======Laporan Gaji======|");
-                System.out.println("|Gaji Dasar   : " + gajiDasar + "|");
-                System.out.println("|Pajak        : " + pajak + " |");
-                System.out.println("|Tunjangan    : " + tunjangan + " |");
-                System.out.println("|Total Gaji   : " + gajiBersih + "|");
+                System.out.println("======Laporan Gaji======");
+                System.out.println("Gaji Dasar   : " + gajiDasar );
+                System.out.println("Pajak        : " + pajak );
+                System.out.println("Tunjangan    : " + tunjangan  );
+                System.out.println("Total Gaji   : " + gajiBersih );
 
-                System.out.println("-----Inputan Lembur-----");
-                System.out.print("|Masukkan Jam Lembur :|");
+                System.out.println("\n======Perhitungan Lembur======");
+                System.out.print("  Masukkan Jam Lembur :");
                 int jmlembur = scjamlembur.nextInt();
 
                 if (jmlembur > 0) {
                     int bonus = 20000;
                     double gajiLembur = jmlembur * bonus;
                     double totalGaji = gajiBersih + gajiLembur;
-                    System.out.println("|  Gaji Lembur Anda = " + gajiLembur + "   |");
-                    System.out.println("|  Total Gaji Anda  = " + totalGaji + " |");
+                    System.out.println("Gaji Lembur Anda = " + gajiLembur );
+                    System.out.println("\nTOTAL GAJI ANDA  = " + totalGaji );
+                    System.out.println("=====================================");
                     laporanGaji[i][7] = String.valueOf(gajiLembur);
                     laporanGaji[i][8] = String.valueOf(totalGaji);
                 } else {
-                    System.out.println("|  Total Gaji Anda = " + gajiBersih + " |");
+                    System.out.println("\nTOTAL GAJI ANDA = " + gajiBersih );
+                    System.out.println("=====================================");
                 }
                 laporanCount++;
             }
