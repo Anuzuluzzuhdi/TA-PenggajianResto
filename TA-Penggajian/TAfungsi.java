@@ -96,7 +96,7 @@ public class TAfungsi {
                     menuPenggajian();
                     break;
                 case 3:
-                    // Tambahkan logika untuk menu laporan bulanan di sini
+                    tampilkanLaporanBulanan();
                     break;
                 default:
                     System.out.println("Inputan tidak valid. Silakan ");
@@ -261,7 +261,7 @@ public class TAfungsi {
             System.out.println("Karyawan dengan ID " + idkaryawan + " tidak ditemukan.");
         }
     }
-    static void laporanBulanan() {
+    static void tampilkanLaporanBulanan() {
         System.out.println("\n========================================Laporan Bulanan======================================================");
         System.out.println("| ID  |      Jabatan      |   Nama  | Gaji Dasar | Pajak | Tunjangan | Gaji Bersih | Gaji Lembur | Total Gaji |");
         System.out.println("|=============================================================================================================|");
@@ -273,8 +273,7 @@ public class TAfungsi {
         }
         System.out.println("|============================================================================================================|");
     }
+}
     //disini
     //edit menu diatas biar ada pilihan 3, terus masukin juga di switch case
     //masukin kode sebelumnya ke fungsi void baru dengan nama laporanBulanan
-
-}
