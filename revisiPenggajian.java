@@ -83,6 +83,7 @@ public class revisiPenggajian {
             System.out.println("|===================================|");
             System.out.println("|          1. Data karyawan         |");
             System.out.println("|          2. Penggajian            |");
+            System.out.println("|          3. Laporan Bulanan       |");
             System.out.println("|===================================|");
             System.out.print("\nMasukkan sistem yang ingin anda masuki: ");
             inputSistem = scsistem.nextInt();
@@ -263,5 +264,17 @@ public class revisiPenggajian {
     //disini
     //edit menu diatas biar ada pilihan 3, terus masukin juga di switch case
     //masukin kode sebelumnya ke fungsi void baru dengan nama laporanBulanan
+    static void laporanBulanan() {
+        System.out.println("\n========================================Laporan Bulanan======================================================");
+        System.out.println("| ID  |      Jabatan      |   Nama  | Gaji Dasar | Pajak | Tunjangan | Gaji Bersih | Gaji Lembur | Total Gaji |");
+        System.out.println("|=============================================================================================================|");
+        for (int i = 0; i < laporanCount; i++) {
+            System.out.printf("| %-4s| %-18s| %-8s| %-10s| %-5s| %-9s| %-11s| %-12s| %-10s|%n",
+                    laporanGaji[i][0], laporanGaji[i][1], laporanGaji[i][2],
+                    laporanGaji[i][3], laporanGaji[i][4], laporanGaji[i][5],
+                    laporanGaji[i][6], laporanGaji[i][7], laporanGaji[i][8]);
+        }
+        System.out.println("|============================================================================================================|");
+    }
 
 }
