@@ -1,34 +1,52 @@
+//untuk import scanner nya
 import java.util.Scanner;
 
 public class penggajianmultilevel {
 
+    //fungsi untuk login 
     static String[][] user = {
             {"manager1", "password1"},
             {"manager2", "password2"}
     };
-
+    //fungsi untuk masuk ketika login
     static String loggedInManager;
 
+    //deklarasi array untuk data karyawan
     static String[][] dataKaryawan1;
     static String[][] dataKaryawan2;
+    // Variabel untuk menyimpan indeks gaji sesuai jabatan
+    static int indeksGaji;
+
+    //deklarasi array untuk gaji karyawan
     static double[][] gajiBackoffice;
     static double[][] gajiOperasional;
+    static int indeksGajiPenggajian;
+
+    //deklarasi array untuk laporan bulanan penggajian
     static String[][] laporanGaji;
-
+    //setting indeks awal untuk nanti di sistem data
+    //dan juga di sistem penggajian karena data awal ada 3
     static int currentIndex = 3;
+    //inisialisasi dimulai dari 0 karena belum ada laporan
+    //nanti akan diincrement setiap laporan dibuat
     static int laporanCount = 0;
-
+    //deklarasi scanner untuk tiap-tiapnya
+    static Scanner scpengguna = new Scanner(System.in);
     static Scanner scsistem = new Scanner(System.in);
     static Scanner scmenudata = new Scanner(System.in);
     static Scanner inputdata = new Scanner(System.in);
     static Scanner scmenugaji = new Scanner(System.in);
     static Scanner scidbuatgaji = new Scanner(System.in);
     static Scanner scjamlembur = new Scanner(System.in);
-
+    //fungsi main yang dimana ada deklarasi dan inisialisasi 
+    //data karyawan beserta gajinya 
+    //lalu memanggil fungsi login yang didalamnya nanti akan 
+    //memanggil fungsi menu utama
     public static void main(String[] args) {
         dataKaryawan1 = new String[100][3];
         dataKaryawan2 = new String[100][3];
         //deklarasi dan inisialisasi array gaji untuk backoffice
+        
         gajiBackoffice = new double[][]{
                 {8000000, 0.05, 0.06},  // Manager
                 {3000000, 0.04, 0.05},  // Staff Senior
@@ -66,12 +84,16 @@ public class penggajianmultilevel {
         dataKaryawan2[2][2] = "Putra";
        
 
-        boolean isLoggedIn = login();
-        if (isLoggedIn) {
+        boolean bisaLogin = login();
+        if (bisaLogin) {
             menuUtama();
         }
     }
-
+    //fungsi login terdapat inputan username dan passwordnya
+    //sesuai dengan array data login 
+    //do while di run dulu lalu di cek apakah percobaan kurang dari max percobaan
+    //jika berhasil maka masuk maka mengembalikan nilai true dalam variabel bisaLogin
+    //dan memanggil fungsi menuUtama
     static boolean login() {
         int percobaanLogin = 0;
         int maxPercobaanLogin = 3;
@@ -100,8 +122,9 @@ public class penggajianmultilevel {
         System.out.println("Maaf, Anda telah melebihi batas percobaan login. Program berakhir.");
         return false;
     }
-    
-
+    //masuk ke menu utama 
+    //ada pilihan sistem yang ingin dimasuki
+    //menggunakan switch case untuk memanggil fungsi yang dipilih
     static void menuUtama() {
         while (true) {
             System.out.println("===================================");
@@ -134,7 +157,9 @@ public class penggajianmultilevel {
             }
         }
     }
-
+    //menu data karyawan ada beberapa pilihan fitur
+    //setiap kali memilih fitur maka dicek manager berapa yang masuk
+    //karena nanti data yang ditampilkan akan berbeda
     static void menuDataKaryawan() {
         do {
             int inputmenudata;
@@ -169,7 +194,7 @@ public class penggajianmultilevel {
             }
         } while (true);
     }
-    
+    //fungsi menampilkan  dataKaryawan sesuai dengan manager(1/2)
     static void tampilkanDataKaryawan(String[][] dataKaryawan) {
         System.out.println("\n|============Data Karyawan===========|");
         System.out.println("| ID  |      Jabatan      |   Nama|");
@@ -183,28 +208,84 @@ public class penggajianmultilevel {
     }
     
     static void tambahDataKaryawan(String[][] dataKaryawan) {
-        
         int maxKaryawan = 15;
         boolean tambahData = true;
     
         while (tambahData && currentIndex < maxKaryawan) {
             System.out.println("Masukkan Nama Karyawan: ");
             String nama = inputdata.nextLine();
-            System.out.println("Masukkan Jabatan Karyawan: ");
-            String jabatan = inputdata.nextLine();
+    
+            // Inisialisasi jabatan untuk menghindari error
+            String jabatan = "";
+    
+            // Menentukan pilihan jabatan sesuai dengan manager yang login
+            if (loggedInManager.equals("manager1")) {
+                System.out.println("1. Manager");
+                System.out.println("2. Staff Senior");
+                System.out.println("3. Staff Junior");
+                System.out.print("Pilih jabatan (1/2/3): ");
+                int pilihanJabatan = scsistem.nextInt();
+    
+                switch (pilihanJabatan) {
+                    case 1:
+                        jabatan = "Manager";
+                        break;
+                    case 2:
+                        jabatan = "Staff Senior";
+                        break;
+                    case 3:
+                        jabatan = "Staff Junior";
+                        break;
+                    default:
+                        System.out.println("Pilihan jabatan tidak valid. Data karyawan tidak dapat ditambahkan.");
+                        tambahData = false;
+                        break;
+                }
+            } else if (loggedInManager.equals("manager2")) {
+                System.out.println("1. Head Kitchen");
+                System.out.println("2. Crew Senior");
+                System.out.println("3. Crew Junior");
+                System.out.print("Pilih jabatan (1/2/3): ");
+                int pilihanJabatan = scsistem.nextInt();
+    
+                switch (pilihanJabatan) {
+                    case 1:
+                        jabatan = "Head Kitchen";
+                        break;
+                    case 2:
+                        jabatan = "Crew Senior";
+                        break;
+                    case 3:
+                        jabatan = "Crew Junior";
+                        break;
+                    default:
+                        System.out.println("Pilihan jabatan tidak valid. Data karyawan tidak dapat ditambahkan.");
+                        tambahData = false;
+                        break;
+                }
+            } else {
+                System.out.println("Manager tidak valid. Data karyawan tidak dapat ditambahkan.");
+                return;
+            }
+    
+            // Masukkan id
             System.out.println("Masukkan id: ");
             String id = inputdata.nextLine();
     
+            // Menyimpan data karyawan baru
             dataKaryawan[currentIndex][0] = id;
             dataKaryawan[currentIndex][1] = jabatan;
             dataKaryawan[currentIndex][2] = nama;
+    
             currentIndex++;
     
+            // Menampilkan data karyawan yang baru saja ditambahkan
             System.out.println("Data Karyawan yang Telah Ditambahkan:");
             System.out.println("Nama: " + nama);
             System.out.println("Jabatan: " + jabatan);
             System.out.println("ID: " + id);
     
+            // Tanya apakah ingin menambahkan data karyawan lagi
             System.out.println("Tambah data karyawan lainnya? (ya/tidak): ");
             String jawaban = inputdata.nextLine();
     
@@ -217,7 +298,9 @@ public class penggajianmultilevel {
         }
     }
     
-
+    
+    //fungsi untuk sistem penggajian
+    //data karyawan dan data gaji sesuai dengan manager yang login
     static void menuPenggajian() {
         do {
             int inputmenugaji;
@@ -247,8 +330,8 @@ public class penggajianmultilevel {
         } while (true);
     }
     
-
-    static void prosesPenggajianKaryawan(String[][] dataKaryawan, double[][] gajiJabatan) {
+    //proses penggajian mengambil array yang diperlukan dan membuat array baru yang akan diproses dibawah
+    static void prosesPenggajianKaryawan(String[][] dataKaryawan, double[][] gajiArray) {
     System.out.println("\n===========Penggajian Karyawan==========");
     System.out.print("Masukkan id karyawan yang ingin digaji: ");
     String idkaryawan = scidbuatgaji.nextLine();
@@ -266,45 +349,64 @@ public class penggajianmultilevel {
             found = true;
 
             System.out.println("\nProses penggajian dilakukan di sini.");
-
+            
             // Hitung gaji sesuai jabatan
-            double gajiDasar = gajiJabatan[i][0];
-            double pajak = gajiDasar * gajiJabatan[i][1];
-            double tunjangan = gajiDasar * gajiJabatan[i][2];
-            double gajiBersih = gajiDasar - pajak + tunjangan;
-            laporanGaji[i][0] = karyawan[0];
-            laporanGaji[i][1] = karyawan[1];
-            laporanGaji[i][2] = karyawan[2];
-            laporanGaji[i][3] = String.valueOf(gajiDasar);
-            laporanGaji[i][4] = String.valueOf(pajak);
-            laporanGaji[i][5] = String.valueOf(tunjangan);
-            laporanGaji[i][6] = String.valueOf(gajiBersih);
-
-            // Tampilkan informasi gaji
-            System.out.println("======Laporan Gaji======");
-            System.out.println("Gaji Dasar   : " + gajiDasar );
-            System.out.println("Pajak        : " + pajak );
-            System.out.println("Tunjangan    : " + tunjangan  );
-            System.out.println("Total Gaji   : " + gajiBersih );
-
-            System.out.println("\n======Perhitungan Lembur======");
-            System.out.print("  Masukkan Jam Lembur :");
-            int jmlembur = scjamlembur.nextInt();
-
-            if (jmlembur > 0) {
-                int bonus = 20000;
-                double gajiLembur = jmlembur * bonus;
-                double totalGaji = gajiBersih + gajiLembur;
-                System.out.println("Gaji Lembur Anda = " + gajiLembur );
-                System.out.println("\nTOTAL GAJI ANDA  = " + totalGaji );
-                System.out.println("=====================================");
-                laporanGaji[i][7] = String.valueOf(gajiLembur);
-                laporanGaji[i][8] = String.valueOf(totalGaji);
-            } else {
-                System.out.println("\nTOTAL GAJI ANDA = " + gajiBersih );
-                System.out.println("=====================================");
+            //yang ada pada array gaji
+            for(int j=0;j<gajiArray.length;){
+            if(dataKaryawan[i][1].equalsIgnoreCase("manager")||dataKaryawan[i][1].equalsIgnoreCase("head kitchen")){
+                j=0;
+            }else if(dataKaryawan[i][1].equalsIgnoreCase("staff senior")||dataKaryawan[i][1].equalsIgnoreCase("crew senior")){
+                j=1;
+            }else if (dataKaryawan[i][1].equalsIgnoreCase("Staff junior")||dataKaryawan[i][1].equalsIgnoreCase("crew junior")){
+                j=2;
+            }else{
+                System.out.println("Jabatan tidak terdeteksi");
             }
-            laporanCount++;
+            double gajiDasar = gajiArray[j][0];
+            double pajak = gajiDasar * gajiArray[j][1];
+            double tunjangan = gajiDasar * gajiArray[j][2];
+            double gajiBersih = gajiDasar - pajak + tunjangan;
+
+            // Pastikan laporanCount sesuai dengan indeks yang tersedia
+            if (laporanCount < laporanGaji.length) {
+                laporanGaji[laporanCount][0] = karyawan[0];
+                laporanGaji[laporanCount][1] = karyawan[1];
+                laporanGaji[laporanCount][2] = karyawan[2];
+                laporanGaji[laporanCount][3] = String.valueOf(gajiDasar);
+                laporanGaji[laporanCount][4] = String.valueOf(pajak);
+                laporanGaji[laporanCount][5] = String.valueOf(tunjangan);
+                laporanGaji[laporanCount][6] = String.valueOf(gajiBersih);
+
+                // Tampilkan informasi gaji
+                System.out.println("======Laporan Gaji======");
+                System.out.println("Gaji Dasar   : " + gajiDasar);
+                System.out.println("Pajak        : " + pajak);
+                System.out.println("Tunjangan    : " + tunjangan);
+                System.out.println("Total Gaji   : " + gajiBersih);
+
+                System.out.println("\n======Perhitungan Lembur======");
+                System.out.print("  Masukkan Jam Lembur :");
+                int jmlembur = scjamlembur.nextInt();
+
+                if (jmlembur > 0) {
+                    int bonus = 20000;
+                    double gajiLembur = jmlembur * bonus;
+                    double totalGaji = gajiBersih + gajiLembur;
+                    System.out.println("Gaji Lembur Anda = " + gajiLembur);
+                    System.out.println("\nTOTAL GAJI ANDA  = " + totalGaji);
+                    System.out.println("=====================================");
+                    laporanGaji[laporanCount][7] = String.valueOf(gajiLembur);
+                    laporanGaji[laporanCount][8] = String.valueOf(totalGaji);
+                } else {
+                    System.out.println("\nTOTAL GAJI ANDA = " + gajiBersih);
+                    System.out.println("=====================================");
+                }
+                laporanCount++;
+            } else {
+                System.out.println("Array laporanGaji sudah penuh. Tidak dapat menambahkan laporan lagi.");
+            }
+            break;
+        } 
         }
     }
 
@@ -313,6 +415,8 @@ public class penggajianmultilevel {
     }
 }
 
+    
+    //cetak laporan bulanan setelah dilakukan penggajian
     static void laporanBulanan() {
         System.out.println("\n========================================Laporan Bulanan======================================================");
         System.out.println("| ID  |      Jabatan      |   Nama  | Gaji Dasar | Pajak | Tunjangan | Gaji Bersih | Gaji Lembur | Total Gaji |");
