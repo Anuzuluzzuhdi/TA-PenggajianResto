@@ -123,7 +123,6 @@ public class penggajianmultilevel {
     }
     //pilihan untuk pengguna yang akan login
     static void pilihanPengguna() {
-        System.out.println("===================================");
             System.out.println("\nSelamat datang di Aplikasi Penggajian.");
             int inputpilPengguna;
 
@@ -229,14 +228,14 @@ public class penggajianmultilevel {
     //fungsi menampilkan  dataKaryawan sesuai dengan manager(1/2)
     static void tampilkanDataKaryawan(String[][] dataKaryawan) {
         System.out.println("\n|============Data Karyawan===========|");
-        System.out.println("| ID  |      Jabatan      |   Nama|");
+        System.out.println("| ID  |      Jabatan      |   Nama   |");
         System.out.println("|====================================|");
     
         for (int i = 0; i < currentIndex; i++) {
             System.out.printf("| %-4s| %-18s| %-9s|%n", dataKaryawan[i][0], dataKaryawan[i][1], dataKaryawan[i][2]);
         }
     
-        System.out.println("|===================================|");
+        System.out.println("|====================================|");
     }
     
     static void tambahDataKaryawan(String[][] dataKaryawan) {
@@ -409,13 +408,13 @@ public class penggajianmultilevel {
                 laporanGaji[laporanCount][6] = String.valueOf(gajiBersih);
 
                 // Tampilkan informasi gaji
-                System.out.println("======Laporan Gaji======");
+                System.out.println("|==========Laporan Gaji==========|");
                 System.out.println("Gaji Dasar   : " + gajiDasar);
                 System.out.println("Pajak        : " + pajak);
                 System.out.println("Tunjangan    : " + tunjangan);
                 System.out.println("Total Gaji   : " + gajiBersih);
 
-                System.out.println("\n======Perhitungan Lembur======");
+                System.out.println("\n|=======Perhitungan Lembur=======|");
                 System.out.print("  Masukkan Jam Lembur :");
                 int jmlembur = scjamlembur.nextInt();
 
@@ -425,12 +424,12 @@ public class penggajianmultilevel {
                     double totalGaji = gajiBersih + gajiLembur;
                     System.out.println("Gaji Lembur Anda = " + gajiLembur);
                     System.out.println("\nTOTAL GAJI ANDA  = " + totalGaji);
-                    System.out.println("=====================================");
+                    System.out.println("|================================|");
                     laporanGaji[laporanCount][7] = String.valueOf(gajiLembur);
                     laporanGaji[laporanCount][8] = String.valueOf(totalGaji);
                 } else {
                     System.out.println("\nTOTAL GAJI ANDA = " + gajiBersih);
-                    System.out.println("=====================================");
+                    System.out.println("|================================|");
                 }
                 laporanCount++;
             } else {
@@ -449,16 +448,16 @@ public class penggajianmultilevel {
     
     //cetak laporan bulanan setelah dilakukan penggajian
     static void laporanBulanan() {
-        System.out.println("\n========================================Laporan Bulanan======================================================");
+        System.out.println("\n========================================Laporan Bulanan========================================================");
         System.out.println("| ID  |      Jabatan      |   Nama  | Gaji Dasar | Pajak | Tunjangan | Gaji Bersih | Gaji Lembur | Total Gaji |");
         System.out.println("|=============================================================================================================|");
         for (int i = 0; i < laporanCount; i++) {
-            System.out.printf("| %-4s| %-18s| %-8s| %-10s| %-5s| %-9s| %-11s| %-12s| %-10s|%n",
+            System.out.printf("| %-4s| %-18s| %-8s| %-10s| %-5s| %-9s| %-11s| %-12s| %-12s|%n",
                     laporanGaji[i][0], laporanGaji[i][1], laporanGaji[i][2],
                     laporanGaji[i][3], laporanGaji[i][4], laporanGaji[i][5],
                     laporanGaji[i][6], laporanGaji[i][7], laporanGaji[i][8]);
         }
-        System.out.println("|============================================================================================================|");
+        System.out.println("|==============================================================================================================|");
         
     } 
     //login untuk karyawan, hanya bisa menampilkan slip gaji mereka
@@ -473,16 +472,16 @@ public class penggajianmultilevel {
                 loggedInKaryawan = inputID;
                 menuKaryawan(); // Panggil fungsi menuKaryawan setelah login berhasil
                 return true;
-            }
-            else {
+            } else {
                 System.out.println("Login karyawan gagal. ID Karyawan tidak valid.");
             }
         }
         return false;
     }
+    
     static void menuKaryawan() {
-        boolean karyawanLogin = false;
-        String loggedInID = "";
+    boolean karyawanLogin = false;
+    String loggedInID = "";
 
     // Cek apakah ID karyawan yang login sudah ada dalam array data karyawan
     for (int i = 0; i < currentIndex; i++) {
@@ -506,13 +505,16 @@ public class penggajianmultilevel {
         if (penggajianDilakukan) {
             // Menampilkan slip gaji sesuai dengan ID karyawan yang login
             tampilkanSlipGaji(loggedInID);
+
+            // Setelah menampilkan slip gaji, tampilkan pesan selamat datang kembali
+            System.out.println("\nSelamat datang kembali di Aplikasi Penggajian.");
         } else {
             System.out.println("Maaf, belum dilakukan penggajian untuk karyawan ini.");
         }
     } else {
         System.out.println("Karyawan tidak valid.");
     }
-    }
+}
     static void tampilkanSlipGaji(String idKaryawan) {
         System.out.println("\n=================================== Slip Gaji ===================================");
         System.out.println("| ID  |      Jabatan      |   Nama  | Gaji Dasar | Pajak | Tunjangan | Gaji Bersih |");
@@ -527,7 +529,7 @@ public class penggajianmultilevel {
                         laporanGaji[i][3], laporanGaji[i][4], laporanGaji[i][5],
                         laporanGaji[i][6]);
                 slipGajiDitemukan = true;
-            
+                break; // Keluar dari loop setelah menemukan slip gaji karyawan yang login
             }
         }
     
@@ -535,5 +537,6 @@ public class penggajianmultilevel {
             System.out.println("|===============================================================================|");
             System.out.println("Maaf, belum dilakukan penggajian untuk karyawan ini.");
         }
+        
     }
 }
