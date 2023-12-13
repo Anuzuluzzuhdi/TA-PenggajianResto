@@ -817,6 +817,19 @@ public class TABilingual {
             }
            
         }
+        System.out.println("|===============================================================================|");
+         if(selectedLanguage.equals("id")){
+        System.out.println("1. Logout");
+        } else if(selectedLanguage.equals("en")){
+        System.out.println("1. Logout");
+        }
+
+        int pilihan = scpengguna.nextInt();
+        if (pilihan == 1) {
+        // Lakukan proses logout di sini
+        System.out.println("Logout berhasil.");
+        pilihanPengguna(); // Kembali ke menu utama setelah logout
+    }
         
     }
 }
