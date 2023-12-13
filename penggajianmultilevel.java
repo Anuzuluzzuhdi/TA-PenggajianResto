@@ -1,6 +1,5 @@
 //untuk import scanner nya
 import java.util.Scanner;
-
 public class penggajianmultilevel {
 
     //fungsi untuk login 
@@ -62,7 +61,7 @@ public class penggajianmultilevel {
                 {3000000, 0.04, 0.05},  // Crew Senior
                 {2000000, 0.03, 0.04}   // Crew Junior
         };
-
+        //deklarasi array kosong untuk laporan gaji
         laporanGaji = new String[100][9];
 
         // Inisialisasi data karyawan backoffice
@@ -122,6 +121,7 @@ public class penggajianmultilevel {
         System.out.println("Maaf, Anda telah melebihi batas percobaan login. Program berakhir.");
         return false;
     }
+    //pilihan untuk pengguna yang akan login
     static void pilihanPengguna() {
         System.out.println("===================================");
             System.out.println("\nSelamat datang di Aplikasi Penggajian.");
@@ -151,7 +151,7 @@ public class penggajianmultilevel {
                     break;
             }
     }
-    //masuk ke menu utama 
+    //masuk ke menu untuk manager
     //ada pilihan sistem yang ingin dimasuki
     //menggunakan switch case untuk memanggil fungsi yang dipilih
     static void menuManager() {
@@ -185,8 +185,6 @@ public class penggajianmultilevel {
                     // Opsi untuk logout
                     System.out.println("Logout berhasil.");
                     pilihanPengguna();
-                default:
-                    System.out.println("Inputan tidak valid. Silakan ");
                     break;
             }
         }
@@ -384,8 +382,7 @@ public class penggajianmultilevel {
 
             System.out.println("\nProses penggajian dilakukan di sini.");
             
-            // Hitung gaji sesuai jabatan
-            //yang ada pada array gaji
+            // Hitung gaji sesuai jabatan yang ada pada array gaji
             for(int j=0;j<gajiArray.length;){
             if(dataKaryawan[i][1].equalsIgnoreCase("manager")||dataKaryawan[i][1].equalsIgnoreCase("head kitchen")){
                 j=0;
@@ -464,6 +461,7 @@ public class penggajianmultilevel {
         System.out.println("|============================================================================================================|");
         
     } 
+    //login untuk karyawan, hanya bisa menampilkan slip gaji mereka
     static boolean loginKaryawan() {
         System.out.println("\n===================================");
         System.out.print("Masukkan ID Karyawan: ");
@@ -484,9 +482,9 @@ public class penggajianmultilevel {
     }
     static void menuKaryawan() {
         boolean karyawanLogin = false;
-    String loggedInID = "";
+        String loggedInID = "";
 
-    // Cek apakah ID karyawan yang login sudah terdaftar
+    // Cek apakah ID karyawan yang login sudah ada dalam array data karyawan
     for (int i = 0; i < currentIndex; i++) {
         if (loggedInKaryawan.equals(dataKaryawan1[i][0]) || loggedInKaryawan.equals(dataKaryawan2[i][0])) {
             karyawanLogin = true;
@@ -529,7 +527,7 @@ public class penggajianmultilevel {
                         laporanGaji[i][3], laporanGaji[i][4], laporanGaji[i][5],
                         laporanGaji[i][6]);
                 slipGajiDitemukan = true;
-                break; // Keluar dari loop setelah menemukan slip gaji karyawan yang login
+            
             }
         }
     
@@ -538,5 +536,4 @@ public class penggajianmultilevel {
             System.out.println("Maaf, belum dilakukan penggajian untuk karyawan ini.");
         }
     }
-    
 }
