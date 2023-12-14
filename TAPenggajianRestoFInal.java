@@ -704,13 +704,13 @@ public class TAPenggajianRestoFInal {
         
         System.out.println("|==============================================================================================================|");
         
-        // Menampilkan total gaji dan keterangan
-        if(selectedLanguage.equals("id")){
-            System.out.printf("| %-90s| %-12s|", "Gaji yang harus diberikan pada karyawan", totalGaji);
-        } else if (selectedLanguage.equals("en")){
-            System.out.printf("| %-90s| %-12s|", "Total salary that must be given to employees", totalGaji);
-        }
-        System.out.println("\n================================================================================================================");
+        // Menambahkan format untuk menampilkan total gaji tanpa notasi eksponensial
+    if(selectedLanguage.equals("id")){
+        System.out.printf("| %-90s| %-12.2f|", "Gaji yang harus diberikan pada karyawan", totalGaji);
+    } else if (selectedLanguage.equals("en")){
+        System.out.printf("| %-90s| %-12.2f|", "Total salary that must be given to employees", totalGaji);
+    }
+    System.out.println("\n================================================================================================================");
     }
     
     //login untuk karyawan, hanya bisa menampilkan slip gaji mereka
