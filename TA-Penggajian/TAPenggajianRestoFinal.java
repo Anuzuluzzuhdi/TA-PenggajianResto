@@ -1,6 +1,6 @@
 //untuk import scanner nya
 import java.util.Scanner;
-public class TABilingual {
+public class TAPenggajianRestoFinal {
 
     //fungsi untuk login 
     static String[][] user = {
@@ -11,6 +11,8 @@ public class TABilingual {
     static String loggedInManager;
     static String loggedInKaryawan;
     
+
+
     //deklarasi array untuk data karyawan
     static String[][] dataKaryawan1;
     static String[][] dataKaryawan2;
@@ -328,7 +330,6 @@ public class TABilingual {
         System.out.println("|====================================|");
         }
         
-    
         for (int i = 0; i < currentIndex; i++) {
             System.out.printf("| %-4s| %-18s| %-9s|%n", dataKaryawan[i][0], dataKaryawan[i][1], dataKaryawan[i][2]);
         }
@@ -398,6 +399,7 @@ public class TABilingual {
                 System.out.println("3. Crew Junior");
                 System.out.print("Choose a position (1/2/3): ");
                 }
+                
                 int pilihanJabatan = scsistem.nextInt();
     
                 switch (pilihanJabatan) {
@@ -678,24 +680,38 @@ public class TABilingual {
     //cetak laporan bulanan setelah dilakukan penggajian
     static void laporanBulanan() {
         if(selectedLanguage.equals("id")){
-        System.out.println("\n========================================Laporan Bulanan========================================================");
-        System.out.println("| ID  |      Jabatan      |   Nama  | Gaji Dasar | Pajak | Tunjangan | Gaji Bersih | Gaji Lembur | Total Gaji |");
-        System.out.println("|=============================================================================================================|");
-        }else if (selectedLanguage.equals("en")){
-        System.out.println("\n========================================Monthly report========================================================");
-        System.out.println("| ID  |      Position      |   Name  | Base Salary | Tax | Allowance | Net salary | Overtime pay | Total Salary |");
-        System.out.println("|===============================================================================================================|");
+            System.out.println("\n========================================Laporan Bulanan========================================================");
+            System.out.println("| ID  |      Jabatan      |   Nama  | Gaji Dasar | Pajak | Tunjangan | Gaji Bersih | Gaji Lembur | Total Gaji |");
+            System.out.println("|=============================================================================================================|");
+        } else if (selectedLanguage.equals("en")){
+            System.out.println("\n========================================Monthly report========================================================");
+            System.out.println("| ID  |      Position      |   Name  | Base Salary | Tax | Allowance | Net salary | Overtime pay | Total Salary |");
+            System.out.println("|===============================================================================================================|");
         }
+        
+        double totalGaji = 0; // Inisialisasi variabel totalGaji
         
         for (int i = 0; i < laporanCount; i++) {
             System.out.printf("| %-4s| %-18s| %-8s| %-10s| %-5s| %-9s| %-11s| %-12s| %-12s|%n",
                     laporanGaji[i][0], laporanGaji[i][1], laporanGaji[i][2],
                     laporanGaji[i][3], laporanGaji[i][4], laporanGaji[i][5],
                     laporanGaji[i][6], laporanGaji[i][7], laporanGaji[i][8]);
+            
+            // Menghitung total gaji
+            totalGaji += Double.parseDouble(laporanGaji[i][8]);
         }
+        
         System.out.println("|==============================================================================================================|");
         
-    } 
+        // Menampilkan total gaji dan keterangan
+        if(selectedLanguage.equals("id")){
+            System.out.printf("| %-90s| %-12s|", "Gaji yang harus diberikan pada karyawan", totalGaji);
+        } else if (selectedLanguage.equals("en")){
+            System.out.printf("| %-90s| %-12s|", "Total salary that must be given to employees", totalGaji);
+        }
+        System.out.println("\n================================================================================================================");
+    }
+    
     //login untuk karyawan, hanya bisa menampilkan slip gaji mereka
     static boolean loginKaryawan() {
         if(selectedLanguage.equals("id")){
@@ -814,6 +830,19 @@ public class TABilingual {
             }
            
         }
+        System.out.println("|===============================================================================|");
+         if(selectedLanguage.equals("id")){
+        System.out.println("1. Logout");
+        } else if(selectedLanguage.equals("en")){
+        System.out.println("1. Logout");
+        }
+
+        int pilihan = scpengguna.nextInt();
+        if (pilihan == 1) {
+        // Lakukan proses logout di sini
+        System.out.println("Logout berhasil.");
+        pilihanPengguna(); // Kembali ke menu utama setelah logout
+    }
         
     }
 }
